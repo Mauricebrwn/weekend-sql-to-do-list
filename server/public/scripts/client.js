@@ -56,7 +56,12 @@ function createChore() {
         fetchAndRenderChores();
     }).catch((error) => {
         console.log('something broke in createChore():', error);
-    })
+    });
+
+    $('#ChoreIn').val('');
+    $('#WhosItForIn').val('');
+    $('#DoneIn').val('');
+    $('#NotesIn').val('');
 }
 
 function deleteChore() {
