@@ -98,7 +98,13 @@ function switchChoreToDone () {
 
 function deleteChore() {
     let idToDelete = $(this).parent().parent().data().id;
-
+    swal("Are you sure its done? Better double check!", {
+        title: "Delete Chore",
+        icon: "warning",
+        dangerMode: true,
+        buttons: true,
+    }).then((response) => {
+        if (response === true){
     $.ajax({
         method: 'DELETE',
         url: `/chores/${idToDelete}`
@@ -106,5 +112,7 @@ function deleteChore() {
         fetchAndRenderChores();
     }).catch((error) => {
         console.log('deleteChore() is broken:', error);
+    })
+}
     })
 }
