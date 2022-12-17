@@ -13,7 +13,7 @@ function fetchAndRenderChores(){
     }).then((response) => {
     $('#viewChores').empty();
     for(let chore of response) {
-    $('viewChores').append(`
+    $('#viewChores').append(`
     <tr data-id=${chore.id}>
         <td>${chore.chore}</td>
         <td>${chore.whos_it_for}</td>

@@ -16,6 +16,19 @@ app.listen(PORT, () => {
     console.log(`hey. listen. http://localhost:${PORT}`)
   })
 
-  app.get('/chores', (req, res) => {
-    
+app.get('/chores', (req, res) => {
+    console.log('GET /chores');
+    let sqlQuery = `
+    SELECT * FROM "chores"
+    ORDER BY "id";
+    `
+    pool.query(sqlQuery)
+    .then((dbRes) => {
+        let dataFromChoresTable = dbRes.rows;
+        res.send(dataFromChoresTable);
+    })
+    .catch((dbErr) => {
+        console.log('Error in GET /chores', dbErr)
+        res.sendStatus(500);
+    })
   })
