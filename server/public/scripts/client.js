@@ -81,20 +81,20 @@ function switchChoreToDone () {
 }
 
 
-function switchChoreFromDone () {
-    let idToUpdate = $(this).parent().parent().data().id;
-    $.ajax({
-        method: 'PUT',
-        url: `/chores/${idToDelete}`,
-        data: {
-            done: 'N'
-        }
-    }).then((response) => {
-        fetchAndRenderChores();
-    }).catch((response) => {
-        console.log('Error in PUT /chores:', response);
-    })
-}
+// function switchChoreFromDone () {
+//     let idToUpdate = $(this).parent().parent().data().id;
+//     $.ajax({
+//         method: 'PUT',
+//         url: `/chores/${idToDelete}`,
+//         data: {
+//             done: 'N'
+//         }
+//     }).then((response) => {
+//         fetchAndRenderChores();
+//     }).catch((response) => {
+//         console.log('Error in PUT /chores:', response);
+//     })
+// }
 
 function deleteChore() {
     let idToDelete = $(this).parent().parent().data().id;
