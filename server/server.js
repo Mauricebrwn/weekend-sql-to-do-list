@@ -53,3 +53,22 @@ app.get('/chores', (req, res) => {
         res.sendStatus(500)
         })
   })
+
+  app.delete('/chores/:id', (req, res) => {
+    console.log(req.params);
+    let idToDelete = req.params.id;
+
+    let sqlQuery = `
+    DELETE FROM "chores"
+    WHERE "id" = $1;
+    `
+    let sqlValues = [idToDelete];
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+        res.sendStatus(200);
+        })
+        .catch((dbErr) => {
+            console.log('broken in DELETE /chores/:id', dbErr);
+            res.sendStatus(500);
+        })
+  })

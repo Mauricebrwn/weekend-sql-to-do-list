@@ -4,6 +4,7 @@ $(document).ready(function(){
     console.log('JQ');
     fetchAndRenderChores();
     $('#addChoreButton').on('click', createChore);
+    $('body').on('click', '#deleteButton', deleteChore);
 })
 
 function fetchAndRenderChores(){
@@ -22,6 +23,9 @@ function fetchAndRenderChores(){
         <td>${chore.notes}</td>
         <td>
             <button type="button" id="complete">All done</button>
+        </td>
+        <td>
+            <button type="button" id="deleteButton">Delete</button>
         </td>
     </tr>
     `)
@@ -52,5 +56,18 @@ function createChore() {
         fetchAndRenderChores();
     }).catch((error) => {
         console.log('something broke in createChore():', error);
+    })
+}
+
+function deleteChore() {
+    let idToDelete = $(this).parent().parent().data().id;
+
+    $.ajax({
+        method: 'DELETE',
+        url: `/chores/${idToDelete}`
+    }).then((response) => {
+        fetchAndRenderChores();
+    }).catch((error) => {
+        console.log('deleteChore() is broken:', error);
     })
 }
