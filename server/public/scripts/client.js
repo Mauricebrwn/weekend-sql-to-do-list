@@ -3,6 +3,7 @@ console.log('js');
 $(document).ready(function(){
     console.log('JQ');
     fetchAndRenderChores();
+    $('#addChoreButton').on('click', createChore);
 })
 
 function fetchAndRenderChores(){
@@ -29,3 +30,27 @@ function fetchAndRenderChores(){
         console.log('Error in getChores response', dbErr);
     })
     }
+
+function createChore() {
+    let newTask = $('#ChoreIn').val();
+    let newWhoseItFor = $('#WhosItForIn').val();
+    let newDone = $('#DoneIn').val();
+    let newNotes = $('#NotesIn').val();
+
+    let newChore = {
+        chore: newTask,
+        whos_it_for: newWhoseItFor,
+        done: newDone,
+        notes: newNotes
+    }
+
+    $.ajax({
+        method: 'POST',
+        url: '/chores',
+        data: newChore
+    }).then((response) => {
+        fetchAndRenderChores();
+    }).catch((error) => {
+        console.log('something broke in createChore():', error);
+    })
+}

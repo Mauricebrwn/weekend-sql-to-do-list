@@ -32,3 +32,24 @@ app.get('/chores', (req, res) => {
         res.sendStatus(500);
     })
   })
+
+  app.post('/chores', (req, res) => {
+    console.log('POST /chores');
+    console.log(req.body);
+
+    let sqlQuery = `
+    INSERT INTO "chores"
+    ("chore", "whos_it_for", "done","notes")
+    VALUES
+    ($1, $2, $3, $4);
+    `
+    let sqlValues = [req.body.chore, req.body.whos_it_for, req.body.done, req.body.notes];
+    pool.query(sqlQuery, sqlValues)
+        .then((dbRes) => {
+        res.sendStatus(201);
+        })
+        .catch((dbErr) => {
+        console.log('something broke in POST /chores', dbErr);
+        res.sendStatus(500)
+        })
+  })
