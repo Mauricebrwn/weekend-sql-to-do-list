@@ -54,6 +54,29 @@ app.get('/chores', (req, res) => {
         })
   })
 
+  app.put('/chores/:id', (req,res) => {
+    console.log('req.params:', req.params);
+    console.log('req.body:', req.body);
+    let idToUpdate = req.params.id;
+    let newDone = req.body.done;
+    
+    let sqlQuery = `
+    UPDATE "chores"
+        SET "done"=$1
+        WHERE "id" = $2;
+        `
+    let sqlValues = [newDone, idToUpdate];
+    pool.query(sqlQuery,sqlValues) 
+    .then((dbRes) => {
+        console.log(dbRes);
+        res.sendStatus(201)
+    })
+    .catch((dbErr) => {
+        console.log('Error in PUT /chores: ', dbErr);   
+        res.sendStatus(500);
+    })
+})
+
   app.delete('/chores/:id', (req, res) => {
     console.log(req.params);
     let idToDelete = req.params.id;

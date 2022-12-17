@@ -5,6 +5,7 @@ $(document).ready(function(){
     fetchAndRenderChores();
     $('#addChoreButton').on('click', createChore);
     $('body').on('click', '#deleteButton', deleteChore);
+    $('body').on('click', '#completeButton', switchChoreToDone);
 })
 
 function fetchAndRenderChores(){
@@ -22,7 +23,7 @@ function fetchAndRenderChores(){
         <td>${chore.done}</td>
         <td>${chore.notes}</td>
         <td>
-            <button type="button" id="complete">All done</button>
+            <button type="button" id="completeButton">All done</button>
         </td>
         <td>
             <button type="button" id="deleteButton">Delete</button>
@@ -62,6 +63,37 @@ function createChore() {
     $('#WhosItForIn').val('');
     $('#DoneIn').val('');
     $('#NotesIn').val('');
+}
+
+function switchChoreToDone () {
+    let idToUpdate = $(this).parent().parent().data().id;
+    $.ajax({
+        method: 'PUT',
+        url: `/chores/${idToUpdate}`,
+        data: {
+            done: 'Y'
+        }
+    }).then((response) => {
+        fetchAndRenderChores();
+    }).catch((response) => {
+        console.log('Error in PUT /chores:', response);
+    })
+}
+
+
+function switchChoreFromDone () {
+    let idToUpdate = $(this).parent().parent().data().id;
+    $.ajax({
+        method: 'PUT',
+        url: `/chores/${idToDelete}`,
+        data: {
+            done: 'N'
+        }
+    }).then((response) => {
+        fetchAndRenderChores();
+    }).catch((response) => {
+        console.log('Error in PUT /chores:', response);
+    })
 }
 
 function deleteChore() {
