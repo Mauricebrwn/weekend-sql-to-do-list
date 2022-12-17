@@ -17,7 +17,7 @@ function fetchAndRenderChores(){
     $('#viewChores').empty();
     for(let chore of response) {
     $('#viewChores').append(`
-    <tr data-id=${chore.id}>
+    <tr ${conditionallyApplyGreenDone(chore)} data-id=${chore.id}>
         <td>${chore.chore}</td>
         <td>${chore.whos_it_for}</td>
         <td>${chore.done}</td>
@@ -35,6 +35,15 @@ function fetchAndRenderChores(){
         console.log('Error in getChores response', dbErr);
     })
     }
+
+function conditionallyApplyGreenDone(chore) {
+    if (chore.done === 'Y') {
+        return 'class= "green"'
+    }
+    else{
+        return ''
+    }
+}
 
 function createChore() {
     let newTask = $('#ChoreIn').val();
