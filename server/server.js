@@ -15,3 +15,7 @@ app.use(express.static('server/public'));
 app.listen(PORT, () => {
     console.log(`hey. listen. http://localhost:${PORT}`)
   })
+
+  app.get('/chores', (req, res) => {
+    
+  })
