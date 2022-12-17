@@ -9,8 +9,33 @@
     <script src="./scripts/client.js"></script>
     <title>To Do List</title>
 </head>
-<h1>TO DO LIST!!!</h1>
 <body>
-    
+    <header>
+        <h1>TO DO LIST!!!</h1>
+    </header>
+    <section id="addChore">
+        <h2>Add Chore</h2>
+        <input type="text" id="ChoreIn" placeholder="Chore">
+        <input type="text" id="WhosItForIn" placeholder="Whose">
+        <input type="text" id="DoneIn" placeholder="Done">
+        <input type="text" id="NotesIn" placeholder="Notes">
+        <button type="button" id="addChore">Add Chore</button>
+    </section>
+    <section>
+        <h2>All Chores</h2>
+            <table>
+                <thead>
+                    <tr>
+                        <th>Chore</th>
+                        <th>Whose it for?</th>
+                        <th>Done</th>
+                        <th>Notes</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody id="viewChores">
+                </tbody>
+            </table>
+    </section>
 </body>
 </html>
