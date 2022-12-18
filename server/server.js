@@ -1,4 +1,4 @@
-
+//necessary to run page  
 const express = require('express');
 const bodyParser = require('body-parser');
 const pool = require('./modules/pool.js');
@@ -15,7 +15,7 @@ app.use(express.static('server/public'));
 app.listen(PORT, () => {
     console.log(`hey. listen. http://localhost:${PORT}`)
   })
-
+//GET ROUTE with SQL for database
 app.get('/chores', (req, res) => {
     console.log('GET /chores');
     let sqlQuery = `
@@ -32,11 +32,11 @@ app.get('/chores', (req, res) => {
         res.sendStatus(500);
     })
   })
-
+//POST ROUTE with SQL for database
   app.post('/chores', (req, res) => {
     console.log('POST /chores');
     console.log(req.body);
-
+//sanitize inputs prevents table drops
     let sqlQuery = `
     INSERT INTO "chores"
     ("chore", "whos_it_for", "done","notes")
@@ -53,7 +53,7 @@ app.get('/chores', (req, res) => {
         res.sendStatus(500)
         })
   })
-
+//PUT ROUTE with SQL for database
   app.put('/chores/:id', (req,res) => {
     console.log('req.params:', req.params);
     console.log('req.body:', req.body);
@@ -76,7 +76,7 @@ app.get('/chores', (req, res) => {
         res.sendStatus(500);
     })
 })
-
+//DELETE ROUTE with SQL for database
   app.delete('/chores/:id', (req, res) => {
     console.log(req.params);
     let idToDelete = req.params.id;

@@ -7,7 +7,7 @@ $(document).ready(function(){
     $('body').on('click', '#deleteButton', deleteChore);
     $('body').on('click', '#completeButton', switchChoreToDone);
 })
-
+// GET ROUTE gets chores and appends to the DOM
 function fetchAndRenderChores(){
     console.log('in getChores');
     $.ajax({
@@ -16,7 +16,9 @@ function fetchAndRenderChores(){
     }).then((response) => {
     $('#viewChores').empty();
     for(let chore of response) {
-    $('#viewChores').append(`
+    $('#viewChores').append
+    // conditional rendering function goes here 
+    (`    
     <tr ${conditionallyApplyGreenDone(chore)} data-id=${chore.id}>
         <td>${chore.chore}</td>
         <td>${chore.whos_it_for}</td>
@@ -35,7 +37,7 @@ function fetchAndRenderChores(){
         console.log('Error in getChores response', dbErr);
     })
     }
-
+//Conditional rendering  function that changes tr green when complete button is pressed
 function conditionallyApplyGreenDone(chore) {
     if (chore.done === 'Y') {
         return 'class= "green"'
@@ -44,7 +46,7 @@ function conditionallyApplyGreenDone(chore) {
         return ''
     }
 }
-
+//Create new chore function grabs values from inputs
 function createChore() {
     let newTask = $('#ChoreIn').val();
     let newWhoseItFor = $('#WhosItForIn').val();
@@ -57,7 +59,7 @@ function createChore() {
         done: newDone,
         notes: newNotes
     }
-
+//POST ROUTE adds new chore 
     $.ajax({
         method: 'POST',
         url: '/chores',
@@ -67,13 +69,13 @@ function createChore() {
     }).catch((error) => {
         console.log('something broke in createChore():', error);
     });
-
+//clears input fields after new chore is added 
     $('#ChoreIn').val('');
     $('#WhosItForIn').val('');
     $('#DoneIn').val('');
     $('#NotesIn').val('');
 }
-
+// PUT ROUTE changes N to Y when complete button is pressed by id 
 function switchChoreToDone () {
     let idToUpdate = $(this).parent().parent().data().id;
     $.ajax({
@@ -89,9 +91,10 @@ function switchChoreToDone () {
     })
 }
 
-
+//DELETE ROUTE to delete chore from DOM and DB
 function deleteChore() {
     let idToDelete = $(this).parent().parent().data().id;
+    //pop up when delete button is pressed CONFIRM DELETE
     swal("Are you sure its done? Better double check!", {
         title: "Delete Chore",
         icon: "warning",
