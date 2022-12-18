@@ -11,4 +11,5 @@ INSERT INTO "chores"
   VALUES
 ('Sweep','Bella','N','Kitchen for sure'),
 ('Load dishwasher','Tristan','N','Hand wash glass'),
-('Fold clothes','Elli','N','Pants in second drawer');
+('Fold clothes','Elli','N','Pants in second drawer'),
+('Pick up toys','Remy','N','Dont forget Legos');
