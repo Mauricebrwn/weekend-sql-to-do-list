@@ -1,5 +1,5 @@
 body {
-    background-image: linear-gradient(to right,aqua,purple);
+    background-image: linear-gradient(to right,#43cea2,#185a9d);
     margin: .5in;
 }
 h1 {
@@ -34,8 +34,7 @@ button {
 }
 input {
     width: 19%;
-    background-image: linear-gradient(to right,aqua,purple);
-    opacity: 0.9;
+    background-image: linear-gradient(to right,#43cea2,#185a9d);
 }
 #deleteButton {
     background-color: red;
